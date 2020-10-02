@@ -1,19 +1,14 @@
-import React, { useEffect, useContext } from 'react';
-import JokeMain from './components/JokeMain';
-import JokeSide from './components/JokeSide';
-import { JokeContext } from './providers/JokeProvider';
+import React from "react";
+import "./App.css";
+import { PostProvider } from "./providers/PostProvider";
+import PostList from "./components/PostList";
 
 function App() {
-  const { loadJokesForType } = useContext(JokeContext);
-
-  useEffect(() => {
-    loadJokesForType("general");
-  }, []);
-
   return (
     <div className="App">
-      <JokeSide />
-      <JokeMain />
+      <PostProvider>
+        <PostList />
+      </PostProvider>
     </div>
   );
 }

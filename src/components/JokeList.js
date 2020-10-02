@@ -1,21 +1,25 @@
-import React, { useContext } from 'react';
-import JokeCard from './JokeCard';
+import React, { useContext, useEffect } from "react";
+import { PostContext } from "../providers/PostProvider";
+import Post from "./Post";
 
-import { JokeContext } from '../providers/JokeProvider';
+const PostList = () => {
+  const { posts, getAllPosts } = useContext(PostContext);
 
-const JokeList = () => {
-  const { jokes } = useContext(JokeContext);
+  useEffect(() => {
+    getAllPosts();
+  }, []);
 
   return (
-    <article>
-      {jokes.map(joke =>
-        <>
-          <JokeCard joke={joke} />
-          <br />
-        </>
-      )}
-    </article>
-  )
-}
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="cards-column">
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default JokeList;
+export default PostList;
